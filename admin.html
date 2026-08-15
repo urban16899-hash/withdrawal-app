@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Withdrawal Admin Panel </title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(145deg,#f6f3ff,#e8ddff);color:#29243f}
+.wrap{max-width:1100px;margin:auto;padding:28px 16px}.top,.panel{background:rgba(255,255,255,.92);border-radius:24px;box-shadow:0 14px 40px rgba(87,65,160,.12)}
+.top{padding:24px;margin-bottom:18px}.badge{display:inline-block;background:#f0ebff;color:#6e50d8;border-radius:20px;padding:8px 15px;font-weight:800;font-size:12px;letter-spacing:.5px}
+h1{margin:12px 0 5px;font-size:30px}.sub{color:#858096}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.stat{background:#f8f6ff;border-radius:17px;padding:16px}.stat b{display:block;font-size:27px;margin-top:5px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:pointer}.refresh{background:#7050df;color:#fff}.clear{background:#ffe3e3;color:#a52d2d}
+.panel{padding:18px;margin-bottom:18px}.panel h2{margin:5px 0 15px;font-size:20px}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:13px;border-bottom:1px solid #eee8f7;font-size:13px}th{background:#f7f4ff;color:#6950bb;position:sticky;top:0}.pill{display:inline-block;padding:5px 9px;border-radius:12px;background:#f0ebff;color:#684bd2;font-weight:700}.empty{text-align:center;color:#999;padding:35px}
+.note{font-size:12px;color:#8b8599;margin-top:14px}
+.warning{background:#fff3cd;color:#856404;padding:10px 15px;border-radius:10px;margin-bottom:15px;font-size:13px;border-left:4px solid #ffc107}
+@media(max-width:650px){.stats{grid-template-columns:1fr}.wrap{padding:16px}.top{padding:20px}h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="badge">🛡 ADMIN PANEL • FULL DETAILS</span>
+    <h1>Withdrawal Admin Panel</h1>
+    <div class="sub">Complete activity dashboard — all details visible</div>
+    <div class="warning">⚠️ FULL DETAILS MODE: Phone, Password, Account, IFSC all visible. Keep this page secure!</div>
+    <div class="stats">
+      <div class="stat">Login Activity<b id="loginCount">0</b></div>
+      <div class="stat">Withdrawal Activity<b id="withdrawCount">0</b></div>
+      <div class="stat">Total Activity<b id="totalCount">0</b></div>
+    </div>
+    <div class="actions">
+      <button class="refresh" onclick="render()">↻ Refresh</button>
+      <button class="clear" onclick="clearActivity()">Clear All Demo Activity</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>📱 Login Activity</h2>
+    <div class="tablewrap"><table><thead><tr><th>Time</th><th>Platform</th><th>Phone</th><th>Password</th></tr></thead>
+    <tbody id="loginRows"></tbody></table></div>
+  </div>
+
+  <div class="panel">
+    <h2>🏦 Withdrawal Activity</h2>
+    <div class="tablewrap"><table><thead><tr><th>Time</th><th>Platform</th><th>Bank</th><th>Account</th><th>IFSC</th><th>Amount</th></tr></thead>
+    <tbody id="withdrawRows"></tbody></table></div>
+    <div class="note">🔓 Full details mode enabled — all data visible for admin purposes.</div>
+  </div>
+</div>
+
+<script>
+const KEY="withdrawal_demo_activity_v1";
+function getData(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function empty(cols){return `<tr><td colspan="${cols}" class="empty">No demo activity yet.</td></tr>`}
+function render(){
+ const all=getData(), logs=all.filter(x=>x.type==="LOGIN"), withdrawals=all.filter(x=>x.type==="WITHDRAWAL");
+ loginCount.textContent=logs.length;withdrawCount.textContent=withdrawals.length;totalCount.textContent=all.length;
+ loginRows.innerHTML=logs.length?logs.map(x=>`<tr><td>${esc(x.time)}</td><td><span class="pill">${esc(x.platform)}</span></td><td><strong>${esc(x.phone)}</strong></td><td><strong>${esc(x.password)}</strong></td></tr>`).join(""):empty(4);
+ withdrawRows.innerHTML=withdrawals.length?withdrawals.map(x=>`<tr><td>${esc(x.time)}</td><td>${esc(x.platform)}</td><td><strong>${esc(x.bank)}</strong></td><td><strong>${esc(x.account)}</strong></td><td><strong>${esc(x.ifsc)}</strong></td><td><strong>${esc(x.amount)}</strong></td></tr>`).join(""):empty(6);
+}
+function clearActivity(){
+ if(confirm("Clear all demo activity from this browser?")){localStorage.removeItem(KEY);render()}
+}
+render();
+setInterval(render,2000);
+</script>
+</body>
+</html>
